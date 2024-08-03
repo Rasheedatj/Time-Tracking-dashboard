@@ -16,7 +16,9 @@ nav.addEventListener('click', (e) => {
 
 async function fetchData() {
   try {
-    const res = await fetch('http://localhost:3000/events');
+    const res = await fetch(
+      'https://my-json-server.typicode.com/Rasheedatj/Time-Tracking-dashboard/events'
+    );
     if (!res.ok) throw new Error('Error fetching data');
     const data = await res.json();
     fix(data);
