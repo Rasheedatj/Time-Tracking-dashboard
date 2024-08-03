@@ -33,7 +33,7 @@ async function fetchData() {
 
     // remove loader and display
     loader.classList.remove('active');
-    fix(data);
+    displaySections(data);
   } catch (error) {
     // remove loader and display error message
     loader.classList.remove('active');
@@ -42,7 +42,7 @@ async function fetchData() {
   }
 }
 
-function fix(data) {
+function displaySections(data) {
   // clear previous boxes to avoid duplicates
   document.querySelectorAll('.dynamic-box').forEach((box) => box.remove());
 
