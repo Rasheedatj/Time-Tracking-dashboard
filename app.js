@@ -1,29 +1,44 @@
 const navLink = document.querySelectorAll('#profile-nav a');
 const nav = document.querySelector('#profile-nav');
+const loader = document.querySelector('.loader');
+const errorMsg = document.querySelector('.error');
 let active = 'weekly';
 
 nav.addEventListener('click', (e) => {
   e.preventDefault();
 
   if (e.target.classList.contains('navlink')) {
+    // highlight active navlink
     navLink.forEach((link) => link.classList.remove('active'));
     e.target.classList.add('active');
+
+    // update active and refetch data
     active = nav.querySelector('.active').innerText.toLowerCase();
-    // re-fetch to update data with active
     fetchData();
   }
 });
 
 async function fetchData() {
   try {
+    // clear error message before fetching
+    errorMsg.classList.remove('active');
+    loader.classList.add('active');
+
+    // fetch data
     const res = await fetch(
       'https://my-json-server.typicode.com/Rasheedatj/Time-Tracking-dashboard/events'
     );
-    if (!res.ok) throw new Error('Error fetching data');
+    if (!res.ok) throw new Error('Error fetching data, pls try again!');
     const data = await res.json();
+
+    // remove loader and display
+    loader.classList.remove('active');
     fix(data);
   } catch (error) {
-    console.log(error);
+    // remove loader and display error message
+    loader.classList.remove('active');
+    errorMsg.classList.add('active');
+    errorMsg.innerText = error;
   }
 }
 
