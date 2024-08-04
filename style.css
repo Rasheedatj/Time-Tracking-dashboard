@@ -308,6 +308,11 @@ body {
 }
 
 /* media queries */
+@media screen and (max-width: 800px) {
+  .container {
+    width: 90%;
+  }
+}
 @media screen and (max-width: 500px) {
   body {
     padding: 2rem 1rem;
